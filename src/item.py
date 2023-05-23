@@ -22,12 +22,12 @@ class Item:
         Item.all.append(self)
 
     @property
-    def fullname(self):
+    def name(self):
         return f'{self.__name}'
 
-    @fullname.setter
-    def fullname(self, item_name: str):
-        if len(item_name) < 10:
+    @name.setter
+    def name(self, item_name: str):
+        if len(item_name) > 10:
             raise Exception('Длина наименования товара превышает 10 символов.')
         else:
             self.__name = item_name
