@@ -48,7 +48,10 @@ class Item:
         self.price = self.price * self.pay_rate
 
     def __repr__(self):
-        return f'Item: {self.__name}, price: {self.price}, quantity: {self.quant}'
+        return f"Item('{self.__name}', {self.price}, {self.quant})"
+
+    def __str__(self):
+        return f"{self.__name}"
 
     @classmethod
     def instantiate_from_csv(cls):

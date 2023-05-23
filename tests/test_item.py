@@ -23,8 +23,12 @@ def test_fullname(item):
     assert item.name == 'Item'
 
 
-def test___repr__(item):
-    assert item == f'Item: {item.name}, price: {item.price}, quantity: {item.quant}'
+def test_repr_(item):
+    assert repr(item) == f"Item('Item', 1000.0, 5)"
+
+
+def test_str(item):
+    assert str(item) == 'Item'
 
 
 def test_string_to_number():
