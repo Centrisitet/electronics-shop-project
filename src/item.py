@@ -20,14 +20,17 @@ class Item:
         self.price = price
         self.quant = quantity
         Item.all.append(self)
-    @property
-    def item_name(self):
-        return self.__name
 
-    @item_name.setter
-    def item_name(self, name):
-        if len(name) < 10:
-            self.__name = name
+    @property
+    def fullname(self):
+        return f'{self.__name}'
+
+    @fullname.setter
+    def fullname(self, item_name: str):
+        if len(item_name) < 10:
+            raise Exception('Длина наименования товара превышает 10 символов.')
+        else:
+            self.__name = item_name
 
     def calculate_total_price(self) -> float:
         """
@@ -44,18 +47,18 @@ class Item:
         """
         self.price = self.price * self.pay_rate
 
+    def __repr__(self):
+        return f'Item: {self.__name}, price: {self.price}, quantity: {self.quant}'
+
     @classmethod
     def instantiate_from_csv(cls):
+        cls.all = []
         with open('../src/items.csv', newline='') as f:
             reader = csv.reader(f)
             for row in reader:
-                print(row)
                 if row[0] != 'name':
-                    name, price, quantity = row[0], row[1], row[2]
-                    cls.all.append(cls(name, price, quantity))
-
-
-
+                    __name, price, quantity = row[0], row[1], row[2]
+                    cls(__name, price, quantity)
 
     @staticmethod
     def string_to_number(string: str):
