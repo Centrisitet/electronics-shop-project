@@ -47,3 +47,8 @@ def test_instantiate_from_csv():
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
 
+
+def test_add():
+    item_1 = Item('Item', 1000.0, 5)
+    item_2 = Item('Item', 1000.0, 5)
+    assert item_1 + item_2 == 10

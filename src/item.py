@@ -1,6 +1,7 @@
 import csv
 
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -68,3 +69,7 @@ class Item:
         num = float(string)
         num = int(num)
         return num
+
+    def __add__(self, other):
+        return self.quant + other.quant
+
