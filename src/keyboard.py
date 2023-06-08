@@ -1,16 +1,21 @@
 from src.item import Item
 
 
-class Keyboard(Item):
+class MixinLanguage:
+    def __init__(self):
+        self.language == 'EN'
+        
+    def change_lang(self):
+        if self.language == 'EN':
+            self.language = 'RU'
+        elif self.language == 'RU':
+            self.language = 'EN'
+
+
+class Keyboard(Item, MixinLanguage):
     def __init__(self, name: str, price: int, quantity: int):
         super().__init__(name, price, quantity)
         self.__language = 'EN'
-
-    def change_lang(self) -> None:
-        if self.__language == 'EN':
-            self.__language = 'RU'
-        elif self.__language == 'RU':
-            self.__language = 'EN'
 
     @property
     def language(self):
