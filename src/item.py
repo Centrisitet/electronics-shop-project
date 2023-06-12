@@ -1,4 +1,5 @@
 import csv
+from src.error import InstantiateCSVError
 
 
 
@@ -57,12 +58,19 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         cls.all = []
-        with open('../src/items.csv', newline='') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                if row[0] != 'name':
-                    __name, price, quantity = row[0], row[1], row[2]
-                    cls(__name, price, quantity)
+        try:
+            with open('../src/items.csv', newline='') as f:
+                reader = csv.reader(f)
+                try:
+                    for row in reader:
+                        if row[0] != 'name':
+                            __name, price, quantity = row[0], row[1], row[2]
+                            cls(__name, price, quantity)
+                except IndexError as ex:
+                    raise InstantiateCSVError
+        except FileNotFoundError:
+            print("Отсутствует файл item.csv")
+
 
     @staticmethod
     def string_to_number(string: str):
